@@ -1,6 +1,8 @@
 package views;
 
 import data.Persistencia;
+import domain.Marca;
+import domain.Sucursal;
 import domain.Vehiculo;
 import domain.VehiculoTipo;
 import java.util.ArrayList;
@@ -15,6 +17,24 @@ public class Controlador {
             vehiculos.add(new VehiculoViewModel(vehiculo));
         }
         return vehiculos;
+    }
+    
+    public static ArrayList<Sucursal> getSucursales(){
+        return Persistencia.getSucursales();
+    }
+    
+    public static ArrayList<Marca> getMarcas(){
+        return Persistencia.getMarcas();
+    }
+    
+    public static void agregarVehiculoCombustible(String patente, Marca marca, String modelo, int anio, 
+            double capacidadCarga, Sucursal sucursal, double kmPorLitro, double litrosExtra){
+        Persistencia.agregarVehiculoCombustible(patente, marca, modelo, anio, capacidadCarga, sucursal, kmPorLitro, litrosExtra);
+    }
+    
+    public static void agregarVehiculoElectrico(String patente, Marca marca, String modelo, int anio, 
+            double capacidadCarga, Sucursal sucursal, double kwhBase){
+        Persistencia.agregarVehiculoElectrico(patente, marca, modelo, anio, capacidadCarga, sucursal, kwhBase);
     }
     
     public static double[] calcularConsumos(Map<String, Double> vehiculos){
