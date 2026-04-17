@@ -26,18 +26,24 @@ public class Persistencia {
     }
     
     private static void inicializarMarcas(){
+        // Unificamos las marcas de ambas ramas para no perder datos
         Marca m1 = new Marca("Ford", "Estados Unidos");
         Marca m2 = new Marca("Toyota", "Japón");
         Marca m3 = new Marca("Volkswagen", "Alemania");
         Marca m4 = new Marca("Renault", "Francia");
+        Marca m5 = new Marca("Iveco", "Italia");
+        Marca m6 = new Marca("Mercedes", "Alemania");
         
         marcas.add(m1);
         marcas.add(m2);
         marcas.add(m3);
         marcas.add(m4);
+        marcas.add(m5);
+        marcas.add(m6);
     }
     
     private static void inicializarVehiculos(){
+        // Prevalece la lógica de la rama feature/alta-vehiculo
         // No inicializar vehículos desde código, permitir ingreso por UI
     }
     
