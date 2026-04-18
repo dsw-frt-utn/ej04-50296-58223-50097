@@ -16,14 +16,11 @@ public class ListarVehiculosView extends javax.swing.JFrame {
         this(null);
     }
 
-    public ListarVehiculosView(IngresarVehiculosView parent) {
+    private MenuPrincipalView ventanaPadre;
+    
+    public ListarVehiculosView(MenuPrincipalView menuAnterior) {
         initComponents();
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setMinimumSize(new Dimension(800, 600));
-        setPreferredSize(new Dimension(1000, 700));
-        listarVehiculos();
-        pack();
+        this.ventanaPadre=menuAnterior;
     }
     private void listarVehiculos(){
         ArrayList<VehiculoViewModel> vehiculos = Controlador.getVehiculos();
@@ -56,15 +53,17 @@ public class ListarVehiculosView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         vehiculosGrid = new javax.swing.JTable();
         calcularConsumos = new javax.swing.JButton();
-        regresarButton = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
         totalConsumoElectricosValue = new javax.swing.JLabel();
         totalConsumoCombustibleLabel = new javax.swing.JLabel();
         totalConsumoElectricosLabel = new javax.swing.JLabel();
         totalConsumoCombustibleValue = new javax.swing.JLabel();
+        jBVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Logística - Listar Vehículos");
+        setPreferredSize(new java.awt.Dimension(640, 480));
+        setSize(new java.awt.Dimension(640, 480));
 
         vehiculosGrid.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,13 +82,6 @@ public class ListarVehiculosView extends javax.swing.JFrame {
         calcularConsumos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcularConsumosActionPerformed(evt);
-            }
-        });
-
-        regresarButton.setText("Regresar");
-        regresarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regresarButtonActionPerformed(evt);
             }
         });
 
@@ -113,51 +105,67 @@ public class ListarVehiculosView extends javax.swing.JFrame {
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
-        panelLayout.setAutoCreateGaps(true);
-        panelLayout.setAutoCreateContainerGaps(true);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(totalConsumoElectricosLabel)
-                    .addComponent(totalConsumoCombustibleLabel))
-                .addGap(10, 30, Short.MAX_VALUE)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(totalConsumoElectricosValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalConsumoCombustibleValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(totalConsumoElectricosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalConsumoCombustibleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(totalConsumoElectricosValue, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalConsumoCombustibleValue, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalConsumoElectricosLabel)
                     .addComponent(totalConsumoElectricosValue))
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalConsumoCombustibleLabel)
-                    .addComponent(totalConsumoCombustibleValue)))
+                    .addComponent(totalConsumoCombustibleValue))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        jBVolver.setText("Volver");
+        jBVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(calcularConsumos)
-                .addComponent(regresarButton)
-                .addGap(10, 50, Short.MAX_VALUE)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(calcularConsumos, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                            .addComponent(jBVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                .addGap(10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(calcularConsumos)
-                    .addComponent(regresarButton)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(calcularConsumos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -174,6 +182,13 @@ public class ListarVehiculosView extends javax.swing.JFrame {
          totalConsumoElectricosValue.setText(String.format("%.2f%n kWh", consumos[0]));
          totalConsumoCombustibleValue.setText(String.format("%.2f%n litros", consumos[1]));
     }//GEN-LAST:event_calcularConsumosActionPerformed
+
+    private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
+        // TODO add your handling code here:
+         this.ventanaPadre.setVisible(true);
+   
+    this.dispose();
+    }//GEN-LAST:event_jBVolverActionPerformed
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         IngresarVehiculosView ingresarView = new IngresarVehiculosView();
@@ -220,7 +235,7 @@ public class ListarVehiculosView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton calcularConsumos;
-    private javax.swing.JButton regresarButton;
+    private javax.swing.JButton jBVolver;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panel;
     private javax.swing.JLabel totalConsumoCombustibleLabel;

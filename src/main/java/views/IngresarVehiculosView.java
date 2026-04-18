@@ -235,10 +235,10 @@ public class IngresarVehiculosView extends javax.swing.JFrame {
         jBLimpiar.setText("Limpiar");
         jBLimpiar.addActionListener(evt -> limpiarFormulario());
 
-        jBListar.setText("Ver Vehículos");
+        jBListar.setText("Volver");
         jBListar.addActionListener(evt -> {
-            ListarVehiculosView listarView = new ListarVehiculosView();
-            listarView.setVisible(true);
+            MenuPrincipalView menuView = new MenuPrincipalView();
+            menuView.setVisible(true);
             this.setVisible(false);
         });
 
